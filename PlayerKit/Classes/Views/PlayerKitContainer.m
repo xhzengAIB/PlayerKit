@@ -102,7 +102,6 @@ static NSString * const ZXHPlayerContainerDurationKey = @"duration";
     _volume = 1.0;
     
     _autoPlaybackToMinPreloadBufferTime = YES;
-    _playbackRollbackAtEnd = NO;
     _playbackLoops = NO;
     _allowControlVolumeForGesture = YES;
     _allowControlBrightnessForGesture = YES;
@@ -262,7 +261,7 @@ static NSString * const ZXHPlayerContainerDurationKey = @"duration";
         case PlayerKitBufferingStateBuffering:
         case PlayerKitBufferingStateDelayed: {
             // 判断现在是否有网络，如果没有网络就需要通知缓冲停止了
-            if (self.bufferingState != PlayerKitBufferingStateFull) {
+            if (self.bufferingState != PlayerKitBufferingStateFull && !_flags.localFiled) {
                 [self showIndicator];
             }
             break;
@@ -599,7 +598,6 @@ static NSString * const ZXHPlayerContainerDurationKey = @"duration";
         return;
     }
     [self playerPause];
-    [self playerStop];
     [self callBackDelegateWithDidChangeReadDuration:kCMTimeZero];
     [self callBackDelegateWithDidChangeBufferDuration:kCMTimeZero];
     [self callBackDelegateWithPlaybackState:PlayerKitPlaybackStateStopped];
@@ -640,13 +638,11 @@ static NSString * const ZXHPlayerContainerDurationKey = @"duration";
 #pragma mark - AVFoundation Handle NSNotificaion Methods
 
 - (void)playerItemDidPlayToEndTime:(NSNotification *)notification {
-    if (self.playbackRollbackAtEnd) {
-        [self.player seekToTime:kCMTimeZero];
-    }
-    
     if (!self.playbackLoops) {
         [self stop];
         [self callBackDelegateWithPlaybackDidEnd];
+    } else {
+        [self.player seekToTime:kCMTimeZero];
     }
 }
 

@@ -135,10 +135,6 @@
  */
 @property (nonatomic, assign) BOOL playbackLoops;
 /**
- *  After the play roll back to the beginning，default is NO
- */
-@property (nonatomic, assign) BOOL playbackRollbackAtEnd;
-/**
  *  Automatically after the minimum target buffer time，default is YES
  */
 @property (nonatomic, assign) BOOL autoPlaybackToMinPreloadBufferTime;
