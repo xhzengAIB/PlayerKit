@@ -1,6 +1,6 @@
 # PlayerKit
 
-High efficiency Video, Audio player.
+High efficiency Audio/Video player, Support MP4/MOV/M3U8/3GP, Custom AVFoundation for AVPlayer.
 
 # CocoaPods
 
@@ -18,7 +18,7 @@ PlayerKit is provided under the MIT license. See LICENSE file for details.
 
 # 中文介绍
 
-高效音视频播放器。
+高效的音视频播放器，支持MP4、MOV、m3u8、3GP，自定义AVFoundation中的AVPlayer。
 
 # 安装
 
