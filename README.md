@@ -18,7 +18,7 @@ PlayerKit is provided under the MIT license. See LICENSE file for details.
 
 # 中文介绍
 
-高效的音视频播放器，支持MP4、MOV、m3u8、3GP，使用AVPlayer自定义UI。
+高效的音视频播放器，支持MP4、MOV、M3U8、3GP，使用AVPlayer自定义UI。
 
 # 安装
 
