@@ -11,7 +11,7 @@ High efficiency Audio/Video player, Support MP4/MOV/M3U8/3GP, Custom UI for AVPl
 - [x] Pan Gesture Controll Fast forward and Rewind
 - [x] Pan Gesture Controll Brightness and Volume
 - [x] Heads Up Display controls（Cache Progress、Play, Pause, Fast forward, Rewind）
-+ [] Playing while downloading
+* [] Playing while downloading
 
 # CocoaPods
 
