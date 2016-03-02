@@ -11,7 +11,7 @@ High efficiency Audio/Video player, Support MP4/MOV/M3U8/3GP, Custom UI for AVPl
 - [x] Pan Gesture Controll Fast forward and Rewind
 - [x] Pan Gesture Controll Brightness and Volume
 - [x] Heads Up Display controls（Cache Progress、Play, Pause, Fast forward, Rewind）
-* [] Playing while downloading
+- [ ] Playing while downloading
 
 # CocoaPods
 
@@ -40,7 +40,7 @@ PlayerKit is provided under the MIT license. See LICENSE file for details.
 - [x] 手势控制快进、后退
 - [x] 手势控制亮度、声音
 - [x] 抬头显示控制（缓存进度、播放、暂停、快进、后退）
-+ [] 边下载边播放
+- [ ] 边下载边播放
 
 # 安装
 
