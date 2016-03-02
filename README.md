@@ -1,6 +1,6 @@
 # PlayerKit
 
-High efficiency Audio/Video player, Support MP4/MOV/M3U8/3GP, Custom UI for AVPlayer.
+High efficiency Audio/Video Player，Support MP4、MOV、M3U8、3GP，Custom UI for AVPlayer.
 
 # Features
 
