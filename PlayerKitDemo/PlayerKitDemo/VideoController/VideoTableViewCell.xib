@@ -24,12 +24,6 @@
                                     <constraint firstAttribute="height" constant="200" id="vMz-hv-t5X"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="标题" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WDh-Qp-SKh">
-                                <rect key="frame" x="8" y="208" width="304" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pPt-Up-k2A">
                                 <rect key="frame" x="185" y="228" width="135" height="30"/>
                                 <subviews>
@@ -39,9 +33,9 @@
                                             <constraint firstAttribute="width" constant="30" id="2hu-7z-2Jy"/>
                                             <constraint firstAttribute="height" constant="30" id="Eur-2O-zba"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <state key="normal" title="赞">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="0.17840624999999999" green="0.17840624999999999" blue="0.17840624999999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TOs-Dk-x2g">
@@ -50,9 +44,9 @@
                                             <constraint firstAttribute="width" constant="30" id="CTK-hp-Jlb"/>
                                             <constraint firstAttribute="height" constant="30" id="H0i-7e-U4T"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <state key="normal" title="享">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="0.17840624999999999" green="0.17840624999999999" blue="0.17840624999999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xzR-YE-YYb">
@@ -61,9 +55,9 @@
                                             <constraint firstAttribute="height" constant="30" id="XW5-B1-S5H"/>
                                             <constraint firstAttribute="width" constant="30" id="Zfm-3I-B1S"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <state key="normal" title="评">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="0.17840624999999999" green="0.17840624999999999" blue="0.17840624999999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
                                 </subviews>
@@ -80,6 +74,12 @@
                                     <constraint firstItem="5yb-6x-XL5" firstAttribute="centerY" secondItem="TOs-Dk-x2g" secondAttribute="centerY" id="zJq-cs-iim"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="标题" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WDh-Qp-SKh">
+                                <rect key="frame" x="8" y="208" width="304" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.21131250000000001" green="0.21131250000000001" blue="0.21131250000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>

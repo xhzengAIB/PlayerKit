@@ -33,12 +33,7 @@ typedef NS_ENUM(NSInteger, PlayerKitInitMetohdType) {
 + (NSMutableArray *)loadPlayerKitItems {
     NSMutableArray *items = [[NSMutableArray alloc] init];
     
-    ClassModeItem *item = [[ClassModeItem alloc] init];
-    item.storyboardID = @"PlayerKit";
-    item.functionName = @"PlayerKit Demo";
-    item.initMetohdType = PlayerKitInitMetohdTypeStoryboard;
-    [items addObject:item];
-    
+    ClassModeItem *item = nil;
     item = [[ClassModeItem alloc] init];
     item.className = @"YoutobeViewController";
     item.functionName = @"Youtobe Demo";
@@ -61,6 +56,12 @@ typedef NS_ENUM(NSInteger, PlayerKitInitMetohdType) {
     item.className = @"SohuViewController";
     item.functionName = @"搜狐 Demo";
     item.initMetohdType = PlayerKitInitMetohdTypeInitCode;
+    [items addObject:item];
+    
+    item = [[ClassModeItem alloc] init];
+    item.storyboardID = @"PlayerKit";
+    item.functionName = @"PlayerKit Demo";
+    item.initMetohdType = PlayerKitInitMetohdTypeStoryboard;
     [items addObject:item];
     
     return items;
