@@ -17,7 +17,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    [[UIBarButtonItem appearance] setTitleTextAttributes:@{
+                                                           NSForegroundColorAttributeName : [UIColor whiteColor]
+                                                           } forState:UIControlStateNormal];
     
     return YES;
 }

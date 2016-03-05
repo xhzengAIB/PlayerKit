@@ -5,6 +5,8 @@ target 'PlayerKitDemo' do
 
 pod 'PlayerKit', :path => '../'
 
+pod 'AFNetworking'
+pod 'Mantle'
 pod 'PINRemoteImage'
 
 end

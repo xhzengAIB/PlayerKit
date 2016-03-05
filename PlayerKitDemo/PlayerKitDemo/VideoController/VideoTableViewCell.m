@@ -10,6 +10,8 @@
 #import "VideoTableViewCell.h"
 #import "VideoItem.h"
 
+#import <PINImageView+PINRemoteImage.h>
+
 @interface VideoTableViewCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *thumbnailImageView;
@@ -25,6 +27,9 @@
     }
     _video = video;
     self.titleLabel.text = video.title;
+    [self.thumbnailImageView pin_setImageFromURL:[NSURL URLWithString:video.cover] placeholderImage:nil completion:^(PINRemoteImageManagerResult * _Nonnull result) {
+        
+    }];
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {

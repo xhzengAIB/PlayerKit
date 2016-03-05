@@ -13,16 +13,19 @@
 
 @interface PINRemoteImageTask : NSObject
 
-@property (nonatomic, strong) NSMutableDictionary *callbackBlocks;
+@property (nonatomic, strong, nonnull) NSMutableDictionary *callbackBlocks;
 #if PINRemoteImageLogging
-@property (nonatomic, copy) NSString *key;
+@property (nonatomic, copy, nullable) NSString *key;
 #endif
 
-- (void)addCallbacksWithCompletionBlock:(PINRemoteImageManagerImageCompletion)completionBlock progressBlock:(PINRemoteImageManagerImageCompletion)progressBlock withUUID:(NSUUID *)UUID;
-- (void)removeCallbackWithUUID:(NSUUID *)UUID;
-- (void)callCompletionsWithQueue:(dispatch_queue_t)queue remove:(BOOL)remove withImage:(UIImage *)image animatedImage:(FLAnimatedImage *)animatedImage cached:(BOOL)cached error:(NSError *)error;
+- (void)addCallbacksWithCompletionBlock:(nonnull PINRemoteImageManagerImageCompletion)completionBlock
+                     progressImageBlock:(nullable PINRemoteImageManagerImageCompletion)progressImageBlock
+                  progressDownloadBlock:(nullable PINRemoteImageManagerProgressDownload)progressDownloadBlock
+                               withUUID:(nonnull NSUUID *)UUID;
+- (void)removeCallbackWithUUID:(nonnull NSUUID *)UUID;
+- (void)callCompletionsWithQueue:(nonnull dispatch_queue_t)queue remove:(BOOL)remove withImage:(nullable PINImage *)image animatedImage:(nullable FLAnimatedImage *)animatedImage cached:(BOOL)cached error:(nullable NSError *)error;
 //returns YES if no more attached completionBlocks
-- (BOOL)cancelWithUUID:(NSUUID *)UUID manager:(PINRemoteImageManager *)manager;
+- (BOOL)cancelWithUUID:(nonnull NSUUID *)UUID manager:(nullable PINRemoteImageManager *)manager;
 - (void)setPriority:(PINRemoteImageManagerPriority)priority;
 
 @end

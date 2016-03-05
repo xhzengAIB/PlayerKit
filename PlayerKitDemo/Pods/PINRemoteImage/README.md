@@ -2,7 +2,9 @@
 
 ## Fast, non-deadlocking parallel image downloader and cache for iOS
 
+[![CocoaPods compatible](https://img.shields.io/cocoapods/v/PINRemoteImage.svg?style=flat)](https://cocoapods.org/pods/PINRemoteImage)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Tavis CI build](https://img.shields.io/travis/pinterest/PINRemoteImage.svg?style=flat)](https://travis-ci.org/pinterest/PINRemoteImage)
 
 [PINRemoteImageManager](Pod/Classes/PINRemoteImageManager.h) is an image downloading, processing and caching manager. It uses the concept of download and processing tasks to ensure that even if multiple calls to download or process an image are made, it only occurs one time (unless an item is no longer in the cache). PINRemoteImageManager is backed by GCD and safe to access from multiple threads simultaneously. It ensures that images are decoded off the main thread so that animation performance isn't affected. None of its exposed methods allow for synchronous access. However, it is optimized to call completions on the calling thread if an item is in its memory cache.
 
@@ -13,7 +15,7 @@ PINRemoteImage also has two methods to improve the experience of downloading ima
 ![Progressive JPG with Blur](/progressive.gif "Looks better on device.")
 
 [PINRemoteImageCategoryManager](Pod/Classes/PINRemoteImageCategoryManager.h) defines a protocol which UIView subclasses can implement and provide easy access to 
-PINRemoteImageManager's methods. There are built-in categories on UIImageView, FLAnimatedImageView and UIButton, and it's very easy to implement a new category. See [UIImageView+PINRemoteImage](/Pod/Classes/Image Categories/UIImageView+PINRemoteImage.h) of the existing categories for reference.
+PINRemoteImageManager's methods. There are built-in categories on UIImageView, FLAnimatedImageView and UIButton, and it's very easy to implement a new category. See [PINImageView+PINRemoteImage](/Pod/Classes/Image Categories/PINImageView+PINRemoteImage.h) of the existing categories for reference.
 
 
 Download an image and set it on an image view:

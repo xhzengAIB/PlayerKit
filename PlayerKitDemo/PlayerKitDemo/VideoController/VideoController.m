@@ -9,10 +9,23 @@
 
 #import "VideoController.h"
 #import "VideoTableViewCell.h"
+#import "VideoItem.h"
+
+#import <AFNetworking/AFNetworking.h>
+#import <Mantle/Mantle.h>
+
+static NSString * const VideoDataSourceURLPath = @"http://c.m.163.com/nc/video/home/%ld-%ld.html";
+
 
 @interface VideoController () <UITableViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *videos;
+
+@property (nonatomic, strong) UITableViewCell *loadingTableViewCell;
+@property (nonatomic, strong) UIView *acticatorView;
+@property (nonatomic, strong) UIActivityIndicatorView *indicatorView;
+
+@property (nonatomic, assign) NSInteger dataSourceStart;
 
 @end
 
@@ -23,11 +36,57 @@
     self.view.backgroundColor = [UIColor lightGrayColor];
     
     [self.view addSubview:self.tableView];
+    
+    [self loadDataSource];
+}
+
+- (UITableViewCell *)loadingTableViewCell {
+    if (!_loadingTableViewCell) {
+        _loadingTableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        [_loadingTableViewCell.contentView addSubview:self.acticatorView];
+    }
+    return _loadingTableViewCell;
+}
+
+- (UIView *)acticatorView {
+    if (!_acticatorView) {
+        _acticatorView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 60)];
+        [_acticatorView addSubview:self.indicatorView];
+    }
+    return _acticatorView;
+}
+
+- (UIActivityIndicatorView *)indicatorView {
+    if (!_indicatorView) {
+        _indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        _indicatorView.center = CGPointMake(CGRectGetMidX(_acticatorView.bounds), CGRectGetMidY(_acticatorView.bounds));
+        [_indicatorView startAnimating];
+    }
+    return _indicatorView;
+}
+
+- (void)loadDataSource {
+    [[AFHTTPSessionManager manager] GET:[NSString stringWithFormat:VideoDataSourceURLPath, (long)self.dataSourceStart, self.dataSourceStart + 10] parameters:nil progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSArray *videoList = responseObject[@"videoList"];
+        
+        NSArray *videoSidList = responseObject[@"videoSidList"];
+        
+        NSError *error = nil;
+        NSArray *videoItems = [MTLJSONAdapter modelsOfClass:[VideoItem class] fromJSONArray:videoList error:&error];
+        
+        [self.videos addObjectsFromArray:videoItems];
+        [self.tableView reloadData];
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+    }];
 }
 
 - (NSMutableArray *)videos {
-    if (_videos) {
-        _videos = [NSMutableArray alloc];
+    if (!_videos) {
+        _videos = [[NSMutableArray alloc] init];
     }
     return _videos;
 }
@@ -48,15 +107,28 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.videos.count + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    VideoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:VideoTableViewCellIdentifier forIndexPath:indexPath];
-    
-//    cell.video = self.videos[indexPath.item];
+    UITableViewCell *cell = nil;
+    if (self.videos.count > 0 && indexPath.row < self.videos.count) {
+        VideoTableViewCell *videoCell = [tableView dequeueReusableCellWithIdentifier:VideoTableViewCellIdentifier forIndexPath:indexPath];
+        videoCell.video = self.videos[indexPath.item];
+        
+        cell = videoCell;
+    } else {
+        cell = self.loadingTableViewCell;
+    }
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.videos.count > 0 && indexPath.row < self.videos.count) {
+        return 268;
+    }
+    return 60;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

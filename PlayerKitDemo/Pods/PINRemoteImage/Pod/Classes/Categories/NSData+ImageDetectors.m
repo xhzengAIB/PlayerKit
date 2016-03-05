@@ -24,7 +24,7 @@
     return NO;
 }
 
-#if __has_include(<webp/decode.h>)
+#ifdef PIN_WEBP
 - (BOOL)pin_isWebP
 {
     const NSInteger length = 12;
@@ -37,22 +37,6 @@
         }
     }
     return NO;
-}
-#endif
-
-@end
-
-@implementation NSData (PINImageDetectors_Deprecated)
-
-- (BOOL)isGIF
-{
-    return [self pin_isGIF];
-}
-
-#if __has_include(<webp/decode.h>)
-- (BOOL)isWebP
-{
-    return [self pin_isWebP];
 }
 #endif
 

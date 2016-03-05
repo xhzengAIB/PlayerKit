@@ -8,11 +8,25 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Mantle/Mantle.h>
 
-@interface VideoItem : NSObject
+@interface VideoItem : MTLModel <MTLJSONSerializing>
 
+@property (nonatomic, copy) NSString *cover;
+@property (nonatomic, copy) NSString *descriptionDe;
+@property (nonatomic, assign) NSInteger length;
+@property (nonatomic, copy) NSString *m3u8URL;
+@property (nonatomic, copy) NSString *m3u8HdURL;
+@property (nonatomic, copy) NSString *mp4URL;
+@property (nonatomic, copy) NSString *mp4HDURL;
+@property (nonatomic, assign) NSInteger playCount;
+@property (nonatomic, assign) NSInteger playersize;
+@property (nonatomic, copy) NSString *ptime;
+@property (nonatomic, copy) NSString *replyBoard;
+@property (nonatomic, assign) NSInteger replyCount;
+@property (nonatomic, copy) NSString *replyid;
 @property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *thumbnailURLString;
-@property (nonatomic, copy) NSString *videoURLString;
+@property (nonatomic, copy) NSString *vid;
+@property (nonatomic, copy) NSString *videosource;
 
 @end

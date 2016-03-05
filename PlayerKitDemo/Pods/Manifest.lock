@@ -1,27 +1,49 @@
 PODS:
-  - FLAnimatedImage (1.0.10)
-  - PINCache (2.1.2)
-  - PINRemoteImage (1.2.2):
-    - PINRemoteImage/FLAnimatedImage (= 1.2.2)
-  - PINRemoteImage/Core (1.2.2):
+  - AFNetworking (3.0.4):
+    - AFNetworking/NSURLSession (= 3.0.4)
+    - AFNetworking/Reachability (= 3.0.4)
+    - AFNetworking/Security (= 3.0.4)
+    - AFNetworking/Serialization (= 3.0.4)
+    - AFNetworking/UIKit (= 3.0.4)
+  - AFNetworking/NSURLSession (3.0.4):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.0.4)
+  - AFNetworking/Security (3.0.4)
+  - AFNetworking/Serialization (3.0.4)
+  - AFNetworking/UIKit (3.0.4):
+    - AFNetworking/NSURLSession
+  - FLAnimatedImage (1.0.12)
+  - Mantle (2.0.6):
+    - Mantle/extobjc (= 2.0.6)
+  - Mantle/extobjc (2.0.6)
+  - PINCache (2.2.1)
+  - PINRemoteImage (2.0.1):
+    - PINRemoteImage/FLAnimatedImage (= 2.0.1)
+  - PINRemoteImage/Core (2.0.1):
     - PINCache (>= 2.1)
-  - PINRemoteImage/FLAnimatedImage (1.2.2):
+  - PINRemoteImage/FLAnimatedImage (2.0.1):
     - FLAnimatedImage (>= 1.0)
     - PINRemoteImage/Core
   - PlayerKit (1.0.0)
 
 DEPENDENCIES:
+  - AFNetworking
+  - Mantle
   - PINRemoteImage
   - PlayerKit (from `../`)
 
 EXTERNAL SOURCES:
   PlayerKit:
-    :path: "../"
+    :path: ../
 
 SPEC CHECKSUMS:
-  FLAnimatedImage: e16a1e1cef08e4c509b47e4acbe3923f65c16135
-  PINCache: 9e70271f1bdd60c0465b7208adcc4b6acc1fc376
-  PINRemoteImage: 9f6f484bbceee15e2df5aee0beeac2e261e4ac81
+  AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
+  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
+  Mantle: 299966b00759634931699f69cb6a30b9239b944d
+  PINCache: ed1f07a85cc6fbf488f8ecc1980b07b49b7b85b5
+  PINRemoteImage: 6feb6da5db9a6cc5e3b9006c8f7b749a7e61be49
   PlayerKit: 018d3e04ddc1de3ed253f477cc0fb1bb36599ce8
 
 COCOAPODS: 0.39.0

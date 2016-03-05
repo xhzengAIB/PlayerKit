@@ -41,6 +41,54 @@
 
 
 @implementation FLAnimatedImageView
+@synthesize runLoopMode = _runLoopMode;
+
+#pragma mark - Initializers
+
+// -initWithImage: isn't documented as a designated initializer of UIImageView, but it actually seems to be.
+// Using -initWithImage: doesn't call any of the other designated initializers.
+- (instancetype)initWithImage:(UIImage *)image
+{
+    self = [super initWithImage:image];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
+// -initWithImage:highlightedImage: also isn't documented as a designated initializer of UIImageView, but it doesn't call any other designated initializers.
+- (instancetype)initWithImage:(UIImage *)image highlightedImage:(UIImage *)highlightedImage
+{
+    self = [super initWithImage:image highlightedImage:highlightedImage];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (void)commonInit
+{
+    self.runLoopMode = [[self class] defaultRunLoopMode];
+}
+
 
 #pragma mark - Accessors
 #pragma mark Public
@@ -242,15 +290,7 @@ static NSUInteger gcd(NSUInteger a, NSUInteger b)
             FLWeakProxy *weakProxy = [FLWeakProxy weakProxyForObject:self];
             self.displayLink = [CADisplayLink displayLinkWithTarget:weakProxy selector:@selector(displayDidRefresh:)];
             
-            NSString *mode = NSDefaultRunLoopMode;
-            // Enable playback during scrolling by allowing timer events (i.e. animation) with `NSRunLoopCommonModes`.
-            // But too keep scrolling smooth, only do this for hardware with more than one core and otherwise keep it at the default `NSDefaultRunLoopMode`.
-            // The only devices with single-core chips (supporting iOS 6+) are iPhone 3GS/4 and iPod Touch 4th gen.
-            // Key off `activeProcessorCount` (as opposed to `processorCount`) since the system could shut down cores in certain situations.
-            if ([NSProcessInfo processInfo].activeProcessorCount > 1) {
-                mode = NSRunLoopCommonModes;
-            }
-            [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:mode];
+            [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:self.runLoopMode];
         }
 
         // Note: The display link's `.frameInterval` value of 1 (default) means getting callbacks at the refresh rate of the display (~60Hz).
@@ -264,6 +304,15 @@ static NSUInteger gcd(NSUInteger a, NSUInteger b)
     }
 }
 
+- (void)setRunLoopMode:(NSString *)runLoopMode
+{
+    if (![@[NSDefaultRunLoopMode, NSRunLoopCommonModes] containsObject:runLoopMode]) {
+        NSAssert(NO, @"Invalid run loop mode: %@", runLoopMode);
+        _runLoopMode = [[self class] defaultRunLoopMode];
+    } else {
+        _runLoopMode = runLoopMode;
+    }
+}
 
 - (void)stopAnimating
 {
@@ -367,6 +416,12 @@ static NSUInteger gcd(NSUInteger a, NSUInteger b)
     } else {
         self.currentFrameIndex++;
     }
+}
+
++ (NSString *)defaultRunLoopMode
+{
+    // Key off `activeProcessorCount` (as opposed to `processorCount`) since the system could shut down cores in certain situations.
+    return [NSProcessInfo processInfo].activeProcessorCount > 1 ? NSRunLoopCommonModes : NSDefaultRunLoopMode;
 }
 
 

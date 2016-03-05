@@ -11,4 +11,25 @@
 
 @implementation VideoItem
 
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+    return @{
+             @"cover" : @"cover",
+             @"descriptionDe" : @"descriptionDe",
+             @"length" : @"length",
+             @"m3u8URL" : @"m3u8_url",
+             @"m3u8HdURL" : @"m3u8_hd_url",
+             @"mp4URL" : @"mp4_url",
+             @"mp4HDURL" : @"mp4_hd_url",
+             @"playCount" : @"playCount",
+             @"playersize" : @"playersize",
+             @"ptime" : @"ptime",
+             @"replyBoard" : @"replyBoard",
+             @"replyCount" : @"replyCount",
+             @"replyid" : @"replyid",
+             @"title" : @"title",
+             @"vid" : @"vid",
+             @"videosource" : @"videosource",
+             };
+}
+
 @end
