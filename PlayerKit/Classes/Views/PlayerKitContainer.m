@@ -17,7 +17,7 @@
 static CGFloat const ZHXPlayerVolumeStep = 0.02f;
 static CGFloat const ZHXPlayerBrightnessStep = 0.02f;
 static CGFloat const ZHXPlayerPlaybackSpeedStep = 0.25f;
-static CGFloat const ZHXPlayerMediaProgressStepStep = 5.0f;
+static CGFloat const ZHXPlayerMediaProgressStepStep = 0.5f;
 
 // KVO Contexts
 static NSString * const ZXHPlayerObserverContext = @"ZXHPlayerObserverContext";
@@ -87,6 +87,7 @@ static NSString * const ZXHPlayerContainerDurationKey = @"duration";
 // Gestures
 @property (nonatomic, assign) PlayerKitGestureState gestureState;
 @property (nonatomic, assign) PlayerKitGestureDirection gestureDirection;
+@property (nonatomic, assign) CGFloat gestureTimeValue;
 
 @end
 
@@ -1043,8 +1044,12 @@ static NSString * const ZXHPlayerContainerDurationKey = @"duration";
 
 // 媒体进度
 - (void)mediaProgressPlus:(CGFloat)step {
-    // 当前时间累加step时间 我知道了，只获取第一次，然后再累加收拾，而不是直接累加，哈哈
-    CGFloat dragedTimeValue = CMTimeGetSeconds(self.playerItem.currentTime) + step;
+    [self machinePause];
+    // 当前时间累加step时间 我知道了，只获取第一次，然后再累加手势，而不是直接累加，哈哈
+    CGFloat dragDownTimeValue = CMTimeGetSeconds(self.playerItem.currentTime);
+    self.gestureTimeValue += step;
+    
+    CGFloat dragedTimeValue = dragDownTimeValue + self.gestureTimeValue;
     if (dragedTimeValue > CMTimeGetSeconds(self.totalDuration)) {
         dragedTimeValue = CMTimeGetSeconds(self.totalDuration);
     } else if (dragedTimeValue < 0 || isnan(dragedTimeValue)) {
@@ -1088,6 +1093,7 @@ static NSString * const ZXHPlayerContainerDurationKey = @"duration";
             [self playCurrentTime];
         }
     } else if (self.gestureState == PlayerKitGestureStateProgress) {
+        self.gestureTimeValue = 0.0;
         if (self.allowControlMediaProgressForGesture) {
             [self seekCurrentTimaValue:self.currentTimeValue];
         }
