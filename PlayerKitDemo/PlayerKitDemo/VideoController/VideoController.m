@@ -27,17 +27,22 @@ static NSString * const VideoDataSourceURLPath = @"http://c.m.163.com/nc/video/h
 
 @property (nonatomic, assign) NSInteger dataSourceStart;
 
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 @end
 
 @implementation VideoController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor lightGrayColor];
+    self.view.backgroundColor = [UIColor blackColor];
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(loadDataSource) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:self.refreshControl];
+    [self.refreshControl beginRefreshing];
+    [self loadDataSource];
     
     [self.view addSubview:self.tableView];
-    
-    [self loadDataSource];
 }
 
 - (UITableViewCell *)loadingTableViewCell {
@@ -67,6 +72,7 @@ static NSString * const VideoDataSourceURLPath = @"http://c.m.163.com/nc/video/h
 
 - (void)loadDataSource {
     [[AFHTTPSessionManager manager] GET:[NSString stringWithFormat:VideoDataSourceURLPath, (long)self.dataSourceStart, self.dataSourceStart + 10] parameters:nil progress:NULL success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [self.refreshControl endRefreshing];
         
         NSArray *videoList = responseObject[@"videoList"];
         
@@ -77,7 +83,6 @@ static NSString * const VideoDataSourceURLPath = @"http://c.m.163.com/nc/video/h
         
         [self.videos addObjectsFromArray:videoItems];
         [self.tableView reloadData];
-        
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
@@ -107,7 +112,7 @@ static NSString * const VideoDataSourceURLPath = @"http://c.m.163.com/nc/video/h
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.videos.count + 1;
+    return self.videos.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -132,6 +137,7 @@ static NSString * const VideoDataSourceURLPath = @"http://c.m.163.com/nc/video/h
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     VideoItem *videoItem = self.videos[indexPath.item];
     [self didSelectedRowAtItem:videoItem];

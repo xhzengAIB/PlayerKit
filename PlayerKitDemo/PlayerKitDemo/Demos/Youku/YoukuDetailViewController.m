@@ -70,7 +70,7 @@
         _playerontainer = [[PlayerKitContainer alloc] init];
         _playerontainer.delegate = self;
         _playerontainer.playbackLoops = YES;
-        _playerontainer.mediaPath = @"http://childapp.pailixiu.com/Jack/sample_iPod.m4v";
+        _playerontainer.mediaPath = self.videoItem.mp4URL;
         [_playerontainer buildInterface];
     }
     return _playerontainer;
@@ -105,7 +105,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
-    cell.textLabel.text = [NSString stringWithFormat:@"Comment : %ld", (long)indexPath.item];
+    cell.textLabel.text = [NSString stringWithFormat:@"评论内容 : %ld", (long)indexPath.item];
     
     return cell;
 }
