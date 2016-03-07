@@ -53,6 +53,7 @@ static NSString * const ZXHPlayerContainerDurationKey = @"duration";
     
     // Gestures
     CGPoint _currentLocation;
+    CGFloat _gestureTimeValue;
     
     // Flags
     struct {
@@ -87,7 +88,6 @@ static NSString * const ZXHPlayerContainerDurationKey = @"duration";
 // Gestures
 @property (nonatomic, assign) PlayerKitGestureState gestureState;
 @property (nonatomic, assign) PlayerKitGestureDirection gestureDirection;
-@property (nonatomic, assign) CGFloat gestureTimeValue;
 
 @end
 
@@ -1047,9 +1047,9 @@ static NSString * const ZXHPlayerContainerDurationKey = @"duration";
     [self machinePause];
     // 当前时间累加step时间 我知道了，只获取第一次，然后再累加手势，而不是直接累加，哈哈
     CGFloat dragDownTimeValue = CMTimeGetSeconds(self.playerItem.currentTime);
-    self.gestureTimeValue += step;
+    _gestureTimeValue += step;
     
-    CGFloat dragedTimeValue = dragDownTimeValue + self.gestureTimeValue;
+    CGFloat dragedTimeValue = dragDownTimeValue + _gestureTimeValue;
     if (dragedTimeValue > CMTimeGetSeconds(self.totalDuration)) {
         dragedTimeValue = CMTimeGetSeconds(self.totalDuration);
     } else if (dragedTimeValue < 0 || isnan(dragedTimeValue)) {
@@ -1093,7 +1093,9 @@ static NSString * const ZXHPlayerContainerDurationKey = @"duration";
             [self playCurrentTime];
         }
     } else if (self.gestureState == PlayerKitGestureStateProgress) {
-        self.gestureTimeValue = 0.0;
+        // Reset
+        _gestureTimeValue = 0.0;
+        
         if (self.allowControlMediaProgressForGesture) {
             [self seekCurrentTimaValue:self.currentTimeValue];
         }
@@ -1178,8 +1180,9 @@ static NSString * const ZXHPlayerContainerDurationKey = @"duration";
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
+    // Reset
     _currentLocation = CGPointZero;
-    self.gestureTimeValue = 0.0;
+    
     UITouch *touch = [touches anyObject];
     if (touch.tapCount == 2) {
         // 取消上一次的Perform
