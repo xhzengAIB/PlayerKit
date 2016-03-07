@@ -1179,6 +1179,7 @@ static NSString * const ZXHPlayerContainerDurationKey = @"duration";
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
     _currentLocation = CGPointZero;
+    self.gestureTimeValue = 0.0;
     UITouch *touch = [touches anyObject];
     if (touch.tapCount == 2) {
         // 取消上一次的Perform
