@@ -1,5 +1,7 @@
 # PlayerKit
 
+Blog describes how to design this effect. [Blog](http://zengxianhua.com)
+
 High efficiency Audio/Video Player，Support MP4、MOV、M3U8、3GP，Custom UI for AVPlayer.
 
 # Features
@@ -28,6 +30,8 @@ This library requires `iOS 7.0+` and `Xcode 7.0+`.
 PlayerKit is provided under the MIT license. See LICENSE file for details.
 
 # 中文介绍
+
+博客中描述了如何设计这个效果. [Blog](http://zengxianhua.com)
 
 高效的音视频播放器，支持MP4、MOV、M3U8、3GP，使用AVPlayer自定义UI。
 
