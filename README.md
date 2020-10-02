@@ -4,7 +4,7 @@ Blog describes how to design this effect. [Blog](http://zengxianhua.com)
 
 High efficiency Audio/Video Player，Support MP4、MOV、M3U8、3GP，Custom UI for AVPlayer.
 
-# Features
+# Main Features of PlayerKit 
 
 - [x] Zoom-able full screen playback
 - [x] Floating Windows
